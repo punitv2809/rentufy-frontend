@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import Nav from '../Components/Nav';
 
 const EditProperty = () => {
     const { id } = useParams();
@@ -69,7 +70,8 @@ const EditProperty = () => {
     }
 
     return (
-        <div className="container mx-auto p-4">
+        <div className="container mx-auto">
+            <Nav />
             <h1 className="text-2xl font-bold mb-4">Edit Property</h1>
             <form onSubmit={handleSubmit} className="max-w-lg mx-auto">
                 <div className="mb-4">

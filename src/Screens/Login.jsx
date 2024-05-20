@@ -71,14 +71,19 @@ const Login = () => {
     };
 
     return (
-        <div className="w-full h-screen flex justify-center items-center bg-teal-700">
-            <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-md px-8 pt-6 pb-8 mb-4">
+        <div className="w-full h-screen flex justify-center items-center bg-stone-200">
+            <form onSubmit={handleSubmit} className="w-10/12 md:w-3/12">
+                <div className="flex items-center flex-col capitalize">
+                    <p className='text-3xl font-medium mb-3'>Rentify</p>
+                    <p className='text-4xl mb-2'>Welcome back</p>
+                    <p className='text-black/60'>please enter your details</p>
+                </div>
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
                         Email
                     </label>
                     <input
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+                        className="appearance-none border border-stone-500/50 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-stone-400 focus:border-transparent"
                         id="email"
                         type="email"
                         placeholder="youremail@example.com"
@@ -95,7 +100,7 @@ const Login = () => {
                         Password
                     </label>
                     <input
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+                        className="appearance-none border border-stone-500/50 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-stone-400 focus:border-transparent"
                         id="password"
                         type="password"
                         placeholder="********"
@@ -107,16 +112,19 @@ const Login = () => {
                         <p className="text-red-500 text-xs italic mt-1">{errors.find((error) => error.includes('password'))}</p>
                     )}
                 </div>
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col gap-4 items-center justify-between">
                     <button
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-400"
+                        className="bg-stone-800 w-full hover:bg-stone-700 text-white font-medium py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-400"
                         type="submit"
                     >
                         Login
                     </button>
-                    <Link to={'/register'}>
-                        Register
-                    </Link>
+                    <div className="flex gap-1 capitalize">
+                        <p className='text-black/60'>don't have an account?</p>
+                        <Link to={'/register'} className='font-medium underline'>
+                            Register
+                        </Link>
+                    </div>
                 </div>
             </form>
         </div>

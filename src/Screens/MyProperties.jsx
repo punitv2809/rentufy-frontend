@@ -69,13 +69,13 @@ const Properties = () => {
     }
 
     return (
-        <div className="container mx-auto">
+        <div className="">
             <Nav />
             {loading ? (
                 <p className="text-center text-gray-500">Loading properties...</p>
             ) : (
                 <>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <div className="grid grid-cols-12 gap-4 p-3">
                         {properties.map(property => (
                             <PropertyTile
                                 key={property._id}
@@ -85,7 +85,7 @@ const Properties = () => {
                             />
                         ))}
                     </div>
-                    <div className="flex justify-center mt-4">
+                    <div className="flex justify-center my-4">
                         <button
                             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-l disabled:opacity-50"
                             onClick={handlePrevPage}
@@ -93,7 +93,7 @@ const Properties = () => {
                         >
                             Previous
                         </button>
-                        <span className="px-4 py-2">{currentPage} of {totalPages}</span>
+                        <span className="px-4 py-2 bg-stone-300">{currentPage} of {totalPages}</span>
                         <button
                             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r disabled:opacity-50"
                             onClick={handleNextPage}

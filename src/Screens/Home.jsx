@@ -12,24 +12,15 @@ const Home = () => {
     }
   }, []);
 
-  if (role() === 'seller') {
-    return (
-      <div className="w-screen h-screen bg-teal-700 flex-col capitalize">
-        <Nav />
-        <div className="flex items-center justify-center h-60 text-6xl font-medium">
-            <p>Rentify</p>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div>
-      <section>
-        <h1>go see properties</h1>
-      </section>
+    <div className="w-screen h-screen bg-teal-700 flex-col capitalize">
+      <Nav />
+      <div className="flex items-center justify-center h-60 text-6xl font-medium">
+        <p>Rentify</p>
+      </div>
     </div>
-  )
+  );
+
 }
 
 export default Home

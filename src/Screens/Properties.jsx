@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import PropertyTile from '../Components/PropertyTile';
 import Nav from '../Components/Nav';
+import { role } from '../Utils/auth';
 
 const Properties = () => {
     const [properties, setProperties] = useState([]);
@@ -10,12 +11,14 @@ const Properties = () => {
     const [totalPages, setTotalPages] = useState(1);
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredProperties, setFilteredProperties] = useState([]);
+    const [showModal, setShowModal] = useState(null);
 
     const fetchProperties = async (page) => {
         const token = localStorage.getItem('accessToken');
         setLoading(true);
         try {
-            const response = await axios.get(`${import.meta.env.VITE_BACKEND_API}/seller/property`, {
+            const ep = role() === 'seller' ? 'seller' : 'buyer';
+            const response = await axios.get(`${import.meta.env.VITE_BACKEND_API}/${ep}/property`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 },
@@ -86,22 +89,22 @@ const Properties = () => {
     };
 
     return (
-        <div className="container mx-auto">
+        <div className="">
             <Nav />
-            <div className="mt-4 flex justify-center">
+            <div className="my-4 flex justify-center w-full">
                 <input
                     type="text"
                     placeholder="Search by name, place, bedrooms, bathrooms..."
                     value={searchTerm}
                     onChange={handleSearch}
-                    className="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+                    className="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none w-7/12"
                 />
             </div>
             {loading ? (
                 <p className="text-center text-gray-500">Loading properties...</p>
             ) : (
                 <>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <div className="grid grid-cols-12 gap-4 p-3">
                         {filteredProperties.map(property => (
                             <PropertyTile
                                 key={property._id}
@@ -109,6 +112,15 @@ const Properties = () => {
                                 onDelete={handleDelete}
                                 onUpdate={handleUpdate}
                                 allowLike={true}
+                                interested={async () => {
+                                    const token = localStorage.getItem('accessToken');
+                                    const response = await axios.get(`${import.meta.env.VITE_BACKEND_API}/seller/${property.userId}`, {
+                                        headers: {
+                                            Authorization: `Bearer ${token}`
+                                        }
+                                    });
+                                    setShowModal(response.data[0]);
+                                }}
                             />
                         ))}
                     </div>
@@ -130,6 +142,21 @@ const Properties = () => {
                         </button>
                     </div>
                 </>
+            )}
+            {showModal && (
+                <div className='modal w-screen h-screen fixed top-0 left-0 right-0 bottom-0 z-10 flex items-center justify-center bg-stone-700/50'>
+                    <div className="w-10/12 md:w-4/12 space-y-3 bg-white p-6 rounded-md font-medium">
+                        <div className="w-full flex items-start justify-end">
+                            <button className='bg-rose-500 text-white p-3 rounded-md' onClick={() => {
+                                setShowModal(false);
+                            }}>close</button>
+                        </div>
+                        <p>First Name: {showModal.firstName}</p>
+                        <p>Last Name: {showModal.lastName}</p>
+                        <p>Phone: {showModal.phoneNumber}</p>
+                        <p>Email: {showModal.email}</p>
+                    </div>
+                </div>
             )}
         </div>
     );

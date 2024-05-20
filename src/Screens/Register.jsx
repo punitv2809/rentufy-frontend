@@ -47,137 +47,134 @@ const Register = () => {
         setFormData({ ...formData, role });
     };
     return (
-        <div className="bg-teal-500 w-screen h-screen flex-col">
-            <Nav />
-            <div className="flex items-center justify-center flex-col p-6">
-                <h1 className="text-2xl font-bold mb-4">Register</h1>
-                <form onSubmit={handleSubmit} className='w-7/12 bg-white p-6 rounded-md shadow-md'>
-                    <div className="mb-4">
-                        <label htmlFor="firstName" className="block text-gray-700 mb-2">
-                            First Name
-                        </label>
-                        <input
-                            type="text"
-                            name="firstName"
-                            id="firstName"
-                            className="w-full rounded-md border border-gray-300 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-blue-500"
-                            value={formData.firstName}
-                            onChange={handleChange}
-                        />
-                        {errors.firstName && <p className="text-red-500 text-sm">{errors.firstName}</p>}
-                    </div>
+        <div className="bg-stone-200 w-screen h-screen flex items-center justify-center flex-col">
+            <h1 className="text-2xl font-bold mb-4">Register</h1>
+            <form onSubmit={handleSubmit} className='w-10/12 md:w-3/12 p-6'>
+                <div className="mb-4">
+                    <label htmlFor="firstName" className="block text-gray-700 mb-2">
+                        First Name
+                    </label>
+                    <input
+                        type="text"
+                        name="firstName"
+                        id="firstName"
+                        className="w-full rounded-md border border-gray-300 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-stone-500"
+                        value={formData.firstName}
+                        onChange={handleChange}
+                    />
+                    {errors.firstName && <p className="text-red-500 text-sm">{errors.firstName}</p>}
+                </div>
 
-                    <div className="mb-4">
-                        <label htmlFor="lastName" className="block text-gray-700 mb-2">
-                            Last Name
-                        </label>
-                        <input
-                            type="text"
-                            name="lastName"
-                            id="lastName"
-                            className="w-full rounded-md border border-gray-300 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-blue-500"
-                            value={formData.lastName}
-                            onChange={handleChange}
-                        />
-                        {errors.lastName && <p className="text-red-500 text-sm">{errors.lastName}</p>}
-                    </div>
+                <div className="mb-4">
+                    <label htmlFor="lastName" className="block text-gray-700 mb-2">
+                        Last Name
+                    </label>
+                    <input
+                        type="text"
+                        name="lastName"
+                        id="lastName"
+                        className="w-full rounded-md border border-gray-300 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-stone-500"
+                        value={formData.lastName}
+                        onChange={handleChange}
+                    />
+                    {errors.lastName && <p className="text-red-500 text-sm">{errors.lastName}</p>}
+                </div>
 
-                    <div className="mb-4">
-                        <label htmlFor="email" className="block text-gray-700 mb-2">
-                            Email
-                        </label>
-                        <input
-                            type="email"
-                            name="email"
-                            id="email"
-                            className="w-full rounded-md border border-gray-300 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-blue-500"
-                            value={formData.email}
-                            onChange={handleChange}
-                        />
-                        {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
-                    </div>
+                <div className="mb-4">
+                    <label htmlFor="email" className="block text-gray-700 mb-2">
+                        Email
+                    </label>
+                    <input
+                        type="email"
+                        name="email"
+                        id="email"
+                        className="w-full rounded-md border border-gray-300 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-stone-500"
+                        value={formData.email}
+                        onChange={handleChange}
+                    />
+                    {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
+                </div>
 
-                    <div className="mb-4">
-                        <label htmlFor="password" className="block text-gray-700 mb-2">
-                            Password
-                        </label>
-                        <input
-                            type="password"
-                            name="password"
-                            id="password"
-                            className="w-full rounded-md border border-gray-300 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-blue-500"
-                            value={formData.password}
-                            onChange={handleChange}
-                        />
-                        {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
-                    </div>
+                <div className="mb-4">
+                    <label htmlFor="password" className="block text-gray-700 mb-2">
+                        Password
+                    </label>
+                    <input
+                        type="password"
+                        name="password"
+                        id="password"
+                        className="w-full rounded-md border border-gray-300 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-stone-500"
+                        value={formData.password}
+                        onChange={handleChange}
+                    />
+                    {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
+                </div>
 
-                    <div className="mb-4">
-                        <label htmlFor="phoneNumber" className="block text-gray-700 mb-2">
-                            Phone Number (Optional)
-                        </label>
-                        <input
-                            type="tel" // Use tel input type for phone numbers
-                            name="phoneNumber"
-                            id="phoneNumber"
-                            className="w-full rounded-md border border-gray-300 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-blue-500"
-                            value={formData.phoneNumber}
-                            onChange={handleChange}
-                        />
+                <div className="mb-4">
+                    <label htmlFor="phoneNumber" className="block text-gray-700 mb-2">
+                        Phone Number (Optional)
+                    </label>
+                    <input
+                        type="tel" // Use tel input type for phone numbers
+                        name="phoneNumber"
+                        id="phoneNumber"
+                        className="w-full rounded-md border border-gray-300 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-stone-500"
+                        value={formData.phoneNumber}
+                        onChange={handleChange}
+                    />
+                </div>
+                <div className="mb-4">
+                    <label className="block text-gray-700 mb-2">Role</label>
+                    <div className='flex w-full'>
+                        <button
+                            type="button"
+                            className={`grow mr-2 px-4 py-2 rounded ${formData.role === 'seller' ? 'bg-stone-500 text-white' : 'bg-gray-300 text-gray-700'}`}
+                            onClick={() => handleRoleChange('seller')}
+                        >
+                            Seller
+                        </button>
+                        <button
+                            type="button"
+                            className={`grow px-4 py-2 rounded ${formData.role === 'buyer' ? 'bg-stone-500 text-white' : 'bg-gray-300 text-gray-700'}`}
+                            onClick={() => handleRoleChange('buyer')}
+                        >
+                            Buyer
+                        </button>
                     </div>
+                </div>
+                {Object.keys(errors).length > 0 && ( // Check for any errors
                     <div className="mb-4">
-                        <label className="block text-gray-700 mb-2">Role</label>
-                        <div>
-                            <button
-                                type="button"
-                                className={`mr-2 px-4 py-2 rounded ${formData.role === 'seller' ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-700'}`}
-                                onClick={() => handleRoleChange('seller')}
-                            >
-                                Seller
-                            </button>
-                            <button
-                                type="button"
-                                className={`px-4 py-2 rounded ${formData.role === 'buyer' ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-700'}`}
-                                onClick={() => handleRoleChange('buyer')}
-                            >
-                                Buyer
-                            </button>
-                        </div>
+                        <h3 className="text-red-500 text-sm font-bold">Registration Errors:</h3>
+                        <ul className="list-disc pl-4 text-red-500 text-sm">
+                            {Object.entries(errors).map(([field, error]) => (
+                                <li key={field}>{error}</li>
+                            ))}
+                        </ul>
                     </div>
-                    {Object.keys(errors).length > 0 && ( // Check for any errors
-                        <div className="mb-4">
-                            <h3 className="text-red-500 text-sm font-bold">Registration Errors:</h3>
-                            <ul className="list-disc pl-4 text-red-500 text-sm">
-                                {Object.entries(errors).map(([field, error]) => (
-                                    <li key={field}>{error}</li>
-                                ))}
-                            </ul>
-                        </div>
-                    )}
-                    {registrationError && ( // Check for registration error
-                        <div className="mb-4">
-                            <p className="text-red-500 text-sm">{registrationError}</p>
-                        </div>
-                    )}
+                )}
+                {registrationError && ( // Check for registration error
+                    <div className="mb-4">
+                        <p className="text-red-500 text-sm">{registrationError}</p>
+                    </div>
+                )}
 
-                    {Object.keys(errors).length > 0 && ( // Check for any form validation errors
-                        <div className="mb-4">
-                            <h3 className="text-red-500 text-sm font-bold">Registration Errors:</h3>
-                            <ul className="list-disc pl-4 text-red-500 text-sm">
-                                {Object.entries(errors).map(([field, error]) => (
-                                    <li key={field}>{error}</li>
-                                ))}
-                            </ul>
-                        </div>
-                    )}
-                    <button
-                        type="submit"
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                    >
-                        Register
-                    </button>
-                </form>
-            </div>
+                {Object.keys(errors).length > 0 && ( // Check for any form validation errors
+                    <div className="mb-4">
+                        <h3 className="text-red-500 text-sm font-bold">Registration Errors:</h3>
+                        <ul className="list-disc pl-4 text-red-500 text-sm">
+                            {Object.entries(errors).map(([field, error]) => (
+                                <li key={field}>{error}</li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
+                <button
+                    type="submit"
+                    className="w-full bg-stone-800 hover:bg-stone-700 text-white font-medium py-2 px-4 rounded"
+                >
+                    Register
+                </button>
+            </form>
         </div>
     );
 };

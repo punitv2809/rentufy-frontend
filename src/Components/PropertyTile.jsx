@@ -1,7 +1,8 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { role } from '../Utils/auth';
 
-const PropertyTile = ({ property, onDelete, onUpdate, allowLike }) => {
+const PropertyTile = ({ property, onDelete, onUpdate, allowLike, interested }) => {
     const [likes, setLikes] = useState(property.likeCount);
     const handleLike = async () => {
         const token = localStorage.getItem('accessToken');
@@ -18,7 +19,7 @@ const PropertyTile = ({ property, onDelete, onUpdate, allowLike }) => {
         }
     };
     return (
-        <div className="max-w-sm rounded overflow-hidden shadow-lg m-4">
+        <div className="col-span-12 md:col-span-4 rounded border p-3">
             <img className="w-full h-64 object-cover" src={property.image} alt={property.name} />
             <div className="px-6 py-4">
                 <div className="font-bold text-xl mb-2">{property.name}</div>
@@ -50,20 +51,32 @@ const PropertyTile = ({ property, onDelete, onUpdate, allowLike }) => {
                     ))}
                 </ul>
             </div>
-            <div className="flex justify-between px-6 pt-4 pb-2">
-                <button
-                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                    onClick={onDelete}
-                >
-                    Delete
-                </button>
-                <button
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                    onClick={onUpdate}
-                >
-                    Update
-                </button>
-            </div>
+            {
+                role() === 'seller' && <div className="flex justify-between px-6 pt-4 pb-2">
+                    <button
+                        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                        onClick={onDelete}
+                    >
+                        Delete
+                    </button>
+                    <button
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        onClick={onUpdate}
+                    >
+                        Update
+                    </button>
+                </div>
+            }
+            {
+                role() !== 'seller' && <div className="flex justify-between px-6 pt-4 pb-2">
+                    <button
+                        className="bg-red-500 hover:bg-red-700 text-white font-medium w-full py-2 px-4 rounded"
+                        onClick={interested}
+                    >
+                        Interested
+                    </button>
+                </div>
+            }
         </div>
     );
 };

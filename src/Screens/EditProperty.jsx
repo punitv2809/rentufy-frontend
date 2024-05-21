@@ -70,10 +70,12 @@ const EditProperty = () => {
     }
 
     return (
-        <div className="container mx-auto">
+        <div className="">
             <Nav />
-            <h1 className="text-2xl font-bold mb-4">Edit Property</h1>
-            <form onSubmit={handleSubmit} className="max-w-lg mx-auto">
+            <div className="flex items-center justify-center p-3">
+                <h1 className="text-2xl font-bold mb-4">Edit Property</h1>
+            </div>
+            <form onSubmit={handleSubmit} className="max-w-lg mx-auto p-3">
                 <div className="mb-4">
                     <label htmlFor="name" className="block text-gray-700 font-bold mb-2">Name</label>
                     <input

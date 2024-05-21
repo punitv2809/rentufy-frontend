@@ -12,12 +12,12 @@ const Nav = () => {
     return (
         <nav className="bg-gray-800 text-white px-4 py-4 flex justify-between items-center">
             <Link to="/" className="text-xl font-bold">Rentify</Link>
-            <ul className="flex space-x-4">
-                <li>
+            <ul className="flex space-x-0 md:space-x-4 flex-col md:flex-row">
+                {role() !== 'seller' && <li>
                     <NavLink to="/property" className={({ isActive }) => (isActive ? 'text-blue-500' : '')}>
                         Properties
                     </NavLink>
-                </li>
+                </li>}
                 {
                     role() === 'seller' && <>
                         <li>

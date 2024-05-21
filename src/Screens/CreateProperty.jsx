@@ -78,7 +78,9 @@ const CreateProperty = () => {
     return (
         <div className="">
             <Nav />
-            <h1 className="text-2xl font-bold mb-4">Create New Property</h1>
+            <div className="flex items-center justify-center p-3">
+                <h1 className="text-2xl font-bold mb-4">Create New Property</h1>
+            </div>
             {successMessage && (
                 <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4" role="alert">
                     {successMessage}
@@ -89,7 +91,7 @@ const CreateProperty = () => {
                     {errorMessage}
                 </div>
             )}
-            <form onSubmit={handleSubmit} className="max-w-lg mx-auto">
+            <form onSubmit={handleSubmit} className="max-w-lg mx-auto p-3">
                 <div className="mb-4">
                     <label htmlFor="name" className="block text-gray-700 font-bold mb-2">Name</label>
                     <input
@@ -102,7 +104,7 @@ const CreateProperty = () => {
                     />
                 </div>
                 <div className="mb-4">
-                    <label htmlFor="image" className="block text-gray-700 font-bold mb-2">Image</label>
+                    <label htmlFor="image" className="block text-gray-700 font-bold mb-2">Image Url</label>
                     <input
                         type="text"
                         id="image"

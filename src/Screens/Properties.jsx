@@ -13,6 +13,16 @@ const Properties = () => {
     const [filteredProperties, setFilteredProperties] = useState([]);
     const [showModal, setShowModal] = useState(null);
 
+    const [filters, setFilters] = useState({
+        name: '',
+        place: '',
+        area: '',
+        bedrooms: '',
+        bathrooms: '',
+        hospitalsNearby: '',
+        collegesNearby: ''
+    });
+
     const fetchProperties = async (page) => {
         const token = localStorage.getItem('accessToken');
         setLoading(true);
@@ -73,31 +83,89 @@ const Properties = () => {
         }
     };
 
-    const handleSearch = (e) => {
-        const searchTerm = e.target.value;
-        setSearchTerm(searchTerm);
+    const handleFilterChange = (e) => {
+        const { name, value } = e.target;
+        setFilters({ ...filters, [name]: value });
+    };
+
+    const filterProperties = () => {
         const filtered = properties.filter(property => {
             return (
-                property.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                property.place.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                property.bedrooms.toString().includes(searchTerm) ||
-                property.bathrooms.toString().includes(searchTerm)
-                // Add more filters for other properties if needed
+                (filters.name === '' || property.name.toLowerCase().includes(filters.name.toLowerCase())) &&
+                (filters.place === '' || property.place.toLowerCase().includes(filters.place.toLowerCase())) &&
+                (filters.area === '' || property.area.toString().includes(filters.area)) &&
+                (filters.bedrooms === '' || property.bedrooms.toString().includes(filters.bedrooms)) &&
+                (filters.bathrooms === '' || property.bathrooms.toString().includes(filters.bathrooms)) &&
+                (filters.hospitalsNearby === '' || property.hospitalsNearby.some(hospital => hospital.toLowerCase().includes(filters.hospitalsNearby.toLowerCase()))) &&
+                (filters.collegesNearby === '' || property.collegesNearby.some(college => college.toLowerCase().includes(filters.collegesNearby.toLowerCase())))
             );
         });
         setFilteredProperties(filtered);
     };
 
+    useEffect(() => {
+        filterProperties();
+    }, [filters, properties]);
+
     return (
         <div className="">
             <Nav />
-            <div className="my-4 flex justify-center w-full">
+            <div className="flex items-center justify-center flex-wrap w-full gap-4 bg-gray-800 p-3 border-t border-gray-500">
                 <input
                     type="text"
-                    placeholder="Search by name, place, bedrooms, bathrooms..."
-                    value={searchTerm}
-                    onChange={handleSearch}
-                    className="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none w-7/12"
+                    name="name"
+                    placeholder="Filter by name"
+                    value={filters.name}
+                    onChange={handleFilterChange}
+                    className="border border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none w-full md:w-auto"
+                />
+                <input
+                    type="text"
+                    name="place"
+                    placeholder="Filter by place"
+                    value={filters.place}
+                    onChange={handleFilterChange}
+                    className="border border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none w-full md:w-auto"
+                />
+                <input
+                    type="number"
+                    name="area"
+                    placeholder="Filter by area"
+                    value={filters.area}
+                    onChange={handleFilterChange}
+                    className="border border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none w-full md:w-auto"
+                />
+                <input
+                    type="number"
+                    name="bedrooms"
+                    placeholder="Filter by bedrooms"
+                    value={filters.bedrooms}
+                    onChange={handleFilterChange}
+                    className="border border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none w-full md:w-auto"
+                />
+                <input
+                    type="number"
+                    name="bathrooms"
+                    placeholder="Filter by bathrooms"
+                    value={filters.bathrooms}
+                    onChange={handleFilterChange}
+                    className="border border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none w-full md:w-auto"
+                />
+                <input
+                    type="text"
+                    name="hospitalsNearby"
+                    placeholder="Filter by hospitals nearby"
+                    value={filters.hospitalsNearby}
+                    onChange={handleFilterChange}
+                    className="border border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none w-full md:w-auto"
+                />
+                <input
+                    type="text"
+                    name="collegesNearby"
+                    placeholder="Filter by colleges nearby"
+                    value={filters.collegesNearby}
+                    onChange={handleFilterChange}
+                    className="border border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none w-full md:w-auto"
                 />
             </div>
             {loading ? (
@@ -120,6 +188,11 @@ const Properties = () => {
                                         }
                                     });
                                     setShowModal(response.data[0]);
+                                    axios.get(`${import.meta.env.VITE_BACKEND_API}/user/send-property/${property._id}`, {
+                                        headers: {
+                                            Authorization: `Bearer ${token}`
+                                        }
+                                    });
                                 }}
                             />
                         ))}
